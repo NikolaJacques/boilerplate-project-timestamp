@@ -55,7 +55,7 @@ app.get("/api/:date?",
 (req, res, next) => {
     try{
       req.utc = req.date.toUTCString();
-      req.unix = req.date.getTime().parseInt();
+      req.unix = req.date.getTime();
       next();
     }
     catch {
