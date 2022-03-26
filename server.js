@@ -47,12 +47,12 @@ app.get("/api/:date?",
     } else {
       date = new Date(req.params.date);
     };
-    if (!date) throw new Error({error: "Invalid Date"})
+    if (isNAN(date.getTime())) throw new Error()
     req.date = date;
     next();
   }
-  catch (error) {
-    res.json(error);
+  catch (e) {
+    res.json({error: "Invalid Date"});
   }
 },
 (req, res, next) => {
