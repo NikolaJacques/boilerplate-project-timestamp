@@ -58,7 +58,7 @@ app.get("/api/:date?",
   catch {
     res.json({error: "Error date string to integer"})
   }
-}
+},
 (req, res, next) => {
     try{
       req.utc = req.date.toUTCString();
