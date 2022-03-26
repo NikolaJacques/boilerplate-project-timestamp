@@ -33,7 +33,7 @@ var listener = app.listen(process.env.PORT, function () {
 app.get("/api/:date?", 
 (req, res, next) => {
   try {
-    let utc = new Date(req.params.date);
+    const utc = new Date(req.params.date);
   }
   catch {
     res.json({error: "Invalid Date"});
@@ -41,7 +41,7 @@ app.get("/api/:date?",
   finally {
     try{
       req.utc = utc.toUTCString();
-      req.unix = Match.floor(utc/1000);
+      req.unix = utc.getTime();
       next();
     }
     catch {
