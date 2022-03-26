@@ -33,21 +33,22 @@ var listener = app.listen(process.env.PORT, function () {
 app.get("/api/:date?", 
 (req, res, next) => {
   try {
-    const utc = new Date(req.params.date);
+    req.date = new Date(req.params.date);
+    next();
   }
   catch {
     res.json({error: "Invalid Date"});
   }
-  finally {
+},
+(req, res, next) => {
     try{
-      req.utc = utc.toUTCString();
-      req.unix = utc.getTime();
+      req.utc = req.date.toUTCString();
+      req.unix = req.date.getTime();
       next();
     }
     catch {
       res.json({error: "Date value conversion error"})
     }
-  }
 },
 (req, res) => {
   res.json({
