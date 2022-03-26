@@ -30,15 +30,15 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 // solution
-app.get("/api/:date?", (req, res) => {
+/* app.get("/api/:date?", (req, res) => {
     try {
       res.json({date: req.params.date})
     }
     catch {
       res.json({error: "No date param"});
     }
-});
-/* app.get("/api/:date?", 
+}); */
+app.get("/api/:date?", 
 (req, res, next) => {
   try {
     let date;
@@ -78,4 +78,4 @@ app.get("/api/:date?", (req, res) => {
     unix: req.unix,
     utc: req.utc
   })
-}) */
+})
