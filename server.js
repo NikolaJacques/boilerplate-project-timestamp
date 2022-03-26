@@ -30,7 +30,7 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 // solution
-app.get((req, res) => {
+app.get("/api/:date?", (req, res) => {
     try {
       const date = new Date(req.params.date);
       res.json({date: date})
