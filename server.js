@@ -34,12 +34,19 @@ app.get("/api/:date?",
 (req, res, next) => {
   try {
     let utc = new Date(req.params.date);
-    req.utc = utc.toUTCString();
-    req.unix = Match.floor(utc/1000);
-    next();
   }
   catch {
     res.json({error: "Invalid Date"});
+  }
+  finally {
+    try{
+      req.utc = utc.toUTCString();
+      req.unix = Match.floor(utc/1000);
+      next();
+    }
+    catch {
+      res.json({error: "Date value conversion error"})
+    }
   }
 },
 (req, res) => {
