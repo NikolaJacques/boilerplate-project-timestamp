@@ -30,7 +30,16 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 // solution
-app.get("/api/:date?", 
+app.get((req, res) => {
+    try {
+      const date = new Date(req.params.date);
+      res.json({date: date})
+    }
+    catch {
+      res.json({error: "Invalid Date"});
+    }
+});
+/* app.get("/api/:date?", 
 (req, res, next) => {
   try {
     req.date = new Date(req.params.date);
@@ -43,7 +52,7 @@ app.get("/api/:date?",
 (req, res, next) => {
     try{
       req.utc = req.date.toUTCString();
-      req.unix = req.date.getTime();
+      req.unix = req.date.getTime().parseInt();
       next();
     }
     catch {
@@ -55,4 +64,4 @@ app.get("/api/:date?",
     unix: `${req.unix}`,
     utc: `${req.utc}`
   })
-})
+}) */
