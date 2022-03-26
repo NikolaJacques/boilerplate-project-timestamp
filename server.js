@@ -47,7 +47,7 @@ app.get("/api/:date?",
     } else {
       date = new Date(req.params.date);
     };
-    if (isNAN(date.getTime())) throw new Error()
+    if (isNaN(date.getTime())) throw new Error()
     req.date = date;
     next();
   }
