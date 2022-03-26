@@ -30,20 +30,24 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 // solution
-/* app.get("/api/:date?", (req, res) => {
+app.get("/api/:date?", (req, res) => {
     try {
-      let date = new Date(req.params.date);
-      if (isNaN(date.getTime())) date = new Date(parseInt(req.params.date));
-      res.json({date: date})
+      res.json({date: req.params.date})
     }
     catch {
-      res.json({error: "Invalid Date"});
+      res.json({error: "No date param"});
     }
-}); */
-app.get("/api/:date?", 
+});
+/* app.get("/api/:date?", 
 (req, res, next) => {
   try {
-    req.date = new Date(req.params.date);
+    let date;
+    if (!req.params.date) {
+      date = new Date();
+    } else {
+      date = new Date(req.params.date);
+    };
+    req.date = date;
     next();
   }
   catch {
@@ -74,4 +78,4 @@ app.get("/api/:date?",
     unix: req.unix,
     utc: req.utc
   })
-})
+}) */
