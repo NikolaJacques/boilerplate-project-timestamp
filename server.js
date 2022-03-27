@@ -29,15 +29,6 @@ var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
-// solution
-/* app.get("/api/:date?", (req, res) => {
-    try {
-      res.json({date: req.params.date})
-    }
-    catch {
-      res.json({error: "No date param"});
-    }
-}); */
 app.get("/api/:date?", 
 (req, res, next) => {
   try {
